@@ -1,0 +1,34 @@
+---
+- hosts: localhost,127.0.0.1
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Pull Nginx image
+      docker_image:
+        name: nginx
+        tag: stable
+        pull: yes
+
+    - name: Create index.html template
+      template:
+        src: index.j2
+        dest: /tmp/index.html
+
+    - name: Run Nginx container
+      docker_container:
+        name: nginx
+        image: nginx
+        ports:
+          - "80:80"
+        volumes:
+          - "/tmp/index.html:/usr/share/nginx/html/index.html"
+        log_driver: awslogs
+        log_options:
+          awslogs-region: us-west-2
+          awslogs-group: ContainerLogs
+...
