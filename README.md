@@ -4,13 +4,13 @@
 
 ## **Requirements**
 
+| |                                                    |
+|-|----------------------------------------------------|
+|1| Use Terraform as IaaC to create the infrastructure.|
+|2| Use Ansible to configure host services.            |
 
 
-### 1. Use Terraform as IaaC to create the infrastructure.
-### 2. Use Ansible to configure host services.
-
-
-
+## **Steps**
 
 * Version and variables for AWS VPC and Subnets.
 
